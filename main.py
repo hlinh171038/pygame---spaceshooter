@@ -7,6 +7,7 @@ WIN = pygame.display.set_mode((WIDTH, HEIGHT)) # create frame with WIDTH and HEI
 WHITE = (255,255,255)
 # 3 .fps
 FPS = 60
+VEL = 3
 # 5 sacle up
 SPACESHIP_WIDTH, SPACESHIP_HEIGHT = 55, 40
 # 4. create character
@@ -28,7 +29,25 @@ def draw_window(red, yellow):
     WIN.blit(YELLOW_SPACESHIP, (yellow.x, yellow.y))
     pygame.display.update() 
     
+def red_handle_movement(key_press,red):
+    if(key_press[pygame.K_a]) : # LEFT 
+        red.x -= VEL
+    if(key_press[pygame.K_d]) : # RIGHT
+        red.x += VEL
+    if(key_press[pygame.K_w]) : # UP
+        red.y -= VEL
+    if(key_press[pygame.K_s]) : # DOWN
+        red.y += VEL
 
+def yellow_handle_movement(key_press,yellow):
+    if(key_press[pygame.K_LEFT]) : # LEFT 
+        yellow.x -= VEL
+    if(key_press[pygame.K_RIGHT]) : # RIGHT
+        yellow.x += VEL
+    if(key_press[pygame.K_UP]) : # UP
+        yellow.y -= VEL
+    if(key_press[pygame.K_DOWN]) : # DOWN
+        yellow.y += VEL
 
 def main():
 
@@ -42,6 +61,11 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+            # 8. move spaceship
+            # every loop pygame will ask you if have any key is press
+            key_press = pygame.key.get_pressed()
+            red_handle_movement(key_press, red)
+            yellow_handle_movement(key_press, yellow)
         # 1. change color bg
             draw_window(red, yellow)
     pygame.quit()
