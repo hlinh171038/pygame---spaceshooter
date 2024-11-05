@@ -34,23 +34,24 @@ def draw_window(red, yellow):
     pygame.display.update() 
     
 def red_handle_movement(key_press,red):
-    if(key_press[pygame.K_a]) : # LEFT 
+    # 10 check if spaceship go off the screen or go cross the border
+    if(key_press[pygame.K_a]) and red.x - VEL > 0 : # LEFT 
         red.x -= VEL
-    if(key_press[pygame.K_d]) : # RIGHT
+    if(key_press[pygame.K_d]) and red.x + VEL + SPACESHIP_WIDTH < BODER.x: # RIGHT
         red.x += VEL
-    if(key_press[pygame.K_w]) : # UP
+    if(key_press[pygame.K_w]) and red.y - VEL > 0: # U
         red.y -= VEL
-    if(key_press[pygame.K_s]) : # DOWN
+    if(key_press[pygame.K_s]) and red.y + VEL+ SPACESHIP_HEIGHT < HEIGHT : # DOWN
         red.y += VEL
 
 def yellow_handle_movement(key_press,yellow):
-    if(key_press[pygame.K_LEFT]) : # LEFT 
+    if(key_press[pygame.K_j]) and yellow.x - VEL >WIDTH /2 + 5 : # LEFT 
         yellow.x -= VEL
-    if(key_press[pygame.K_RIGHT]) : # RIGHT
+    if(key_press[pygame.K_l]) and yellow.x + VEL + SPACESHIP_WIDTH < WIDTH.x : # RIGHT
         yellow.x += VEL
-    if(key_press[pygame.K_UP]) : # UP
+    if(key_press[pygame.K_i]) and yellow.y - VEL > 0 : # UP
         yellow.y -= VEL
-    if(key_press[pygame.K_DOWN]) : # DOWN
+    if(key_press[pygame.K_k]) and yellow.y + VEL + SPACESHIP_HEIGHT < HEIGHT: # DOWN
         yellow.y += VEL
 
 def main():
