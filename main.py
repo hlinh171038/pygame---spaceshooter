@@ -5,6 +5,9 @@ import os
 WIDTH, HEIGHT = 900, 500 # CONTANT
 WIN = pygame.display.set_mode((WIDTH, HEIGHT)) # create frame with WIDTH and HEIGHT
 WHITE = (255,255,255)
+BLACK = (0,0,0)
+# 9. draw the border
+BODER = pygame.Rect(WIDTH/2 - 5,0,10,HEIGHT)
 # 3 .fps
 FPS = 60
 VEL = 3
@@ -25,6 +28,7 @@ pygame.display.set_caption("first game !")
 
 def draw_window(red, yellow):
     WIN.fill(WHITE)
+    pygame.draw.rect(WIN, BLACK, BODER)
     WIN.blit(RED_SPACESHIP, (red.x, red.y))
     WIN.blit(YELLOW_SPACESHIP, (yellow.x, yellow.y))
     pygame.display.update() 
