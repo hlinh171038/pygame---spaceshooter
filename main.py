@@ -22,10 +22,10 @@ YELLOW_SPACESHIP = pygame.transform.rotate(pygame.transform.scale(YELLOW_SPACESH
 # 1.change caption 
 pygame.display.set_caption("first game !")
 
-def draw_window():
+def draw_window(red, yellow):
     WIN.fill(WHITE)
-    WIN.blit(RED_SPACESHIP, (300,100))
-    WIN.blit(YELLOW_SPACESHIP, (700, 100))
+    WIN.blit(RED_SPACESHIP, (red.x, red.y))
+    WIN.blit(YELLOW_SPACESHIP, (yellow.x, yellow.y))
     pygame.display.update() 
     
 
@@ -33,6 +33,8 @@ def draw_window():
 def main():
 
     #7 upgrade the draw_window function
+    red = pygame.Rect(300,100,SPACESHIP_WIDTH,SPACESHIP_HEIGHT)
+    yellow = pygame.Rect(700,100,SPACESHIP_WIDTH,SPACESHIP_HEIGHT)
     clock = pygame.time.Clock()
     run = True
     while run:
@@ -41,7 +43,7 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
         # 1. change color bg
-            draw_window()
+            draw_window(red, yellow)
     pygame.quit()
 
 if __name__ == "__main__":
