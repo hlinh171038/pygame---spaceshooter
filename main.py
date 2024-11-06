@@ -2,7 +2,7 @@ import pygame
 # upgrade system help you find the path of image
 import os
 pygame.font.init()
-
+pygame.mixer.init()
 
 WIDTH, HEIGHT = 900, 500 # CONTANT
 WIN = pygame.display.set_mode((WIDTH, HEIGHT)) # create frame with WIDTH and HEIGHT
@@ -12,6 +12,10 @@ RED = (255, 0, 0)
 YELLOW = (255,255,0)
 # 9. draw the border
 BODER = pygame.Rect(WIDTH//2 - 5,0,10,HEIGHT)
+
+#13 sound make
+BULLET_HIT_SOUND = pygame.mixer.Sound('Assets/Grenade+1.mp3' )
+BULLET_FIRE_SOUND = pygame.mixer.Sound('Assets/Gun+Silencer.mp3' )
 #12 health font
 HEALTH_FONT = pygame.font.SysFont('comicsans', 40)
 WINNER_FONT = pygame.font.SysFont('comicsans', 100)
@@ -142,15 +146,19 @@ def main():
                     bullet = pygame.Rect(red.x + red.width,red.y + red.height//2 -2,10, 5)
                     # append to red_bullet array
                     red_bullet.append(bullet)
+                    BULLET_FIRE_SOUND.play()
                 if event.key == pygame.K_RCTRL and len(yellow_bullet) < MAX_BULLET :
                     # create bullet
                     bullet = pygame.Rect(yellow.x,yellow.y +yellow.width//2 -2,10,5)
                     # append to red_bullet array
                     yellow_bullet.append(bullet)
+                    BULLET_FIRE_SOUND.play()
             if event.type == RED_HIT :
                 red_health -= 1
+                BULLET_HIT_SOUND.play()
             if event.type == YELLOW_HIT:
                 yellow_health -= 1
+                BULLET_HIT_SOUND.play()
 
             winner_text = ""
             if red_health <= 0 :
