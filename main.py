@@ -3,6 +3,7 @@ import pygame
 import os
 pygame.font.init()
 
+
 WIDTH, HEIGHT = 900, 500 # CONTANT
 WIN = pygame.display.set_mode((WIDTH, HEIGHT)) # create frame with WIDTH and HEIGHT
 WHITE = (255,255,255)
@@ -13,8 +14,9 @@ YELLOW = (255,255,0)
 BODER = pygame.Rect(WIDTH//2 - 5,0,10,HEIGHT)
 #12 health font
 HEALTH_FONT = pygame.font.SysFont('comicsans', 40)
+WINNER_FONT = pygame.font.SysFont('comicsans', 100)
 # 3 .fps
-FPS = 60
+FPS = 30
 VEL = 3
 #10.2 define speed for bullet
 BULLET_VEL = 7
@@ -62,6 +64,14 @@ def draw_window(red, yellow, red_bullets, yellow_bullets, red_health, yellow_hea
         pygame.draw.rect(WIN, YELLOW, bullet)
 
     pygame.display.update() 
+
+def draw_winner(winner_text) :
+    draw_text = WINNER_FONT.render(winner_text, 1, WHITE)
+    WIN.blit(draw_text,(WIDTH/2 - draw_text.get_width()/2, HEIGHT /2 - draw_text.get_height()/2))
+    # update
+    pygame.display.update()
+    # delay 
+    pygame.time.delay(5000)
     
 def red_handle_movement(key_press,red):
     # 10 check if spaceship go off the screen or go cross the border
@@ -123,7 +133,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-
+                pygame.quit()
             # 10.3 handle bullet when user press
             if event.type == pygame.KEYDOWN:
                 # check if key is ctrl left or ctrl right
@@ -150,7 +160,8 @@ def main():
                 winner_text ="red winner !"
             
             if winner_text != "" :
-                pass # SOMEONE WON
+                draw_winner(winner_text)
+                break
             # 8. move spaceship
             # every loop pygame will ask you if have any key is press
             key_press = pygame.key.get_pressed()
@@ -161,7 +172,7 @@ def main():
             handle_bullets(yellow_bullet, red_bullet, red, yellow)
         # 1. change color bg
             draw_window(red, yellow, red_bullet, yellow_bullet, red_health, yellow_health)
-    pygame.quit()
+    main()
 
 if __name__ == "__main__":
     main()
